@@ -1,0 +1,21 @@
+apiVersion: azure.crossplane.io/v1alpha3
+kind: ResourceGroup
+metadata:
+  name: resource
+spec:
+  location: eastus
+
+---
+
+apiVersion: compute.azure.crossplane.io/v1alpha3
+kind: AKSCluster
+metadata:
+  name: aymeric-demo
+spec:
+  location: eastus
+  version: "1.19.7"
+  nodeVMSize: Standard_D2_v2
+  resourceGroupNameRef:
+    name: resource
+  dnsNamePrefix: dt
+  nodeCount: 3
